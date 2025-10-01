@@ -1,44 +1,49 @@
 package com.springboootacademy.point_of_sale.Entity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "customer")
 public class Customer {
 
     @Id
-    @Column(name="customer_id",length =45)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // <-- Auto-increment ID
+    @Column(name = "customer_id")
     private int customerId;
 
-    @Column(name ="customer_name",length = 100)
+    @Column(name = "customer_name", length = 100)
     private String customerName;
 
-    @Column(name ="customer_address",length = 100)
+    @Column(name = "customer_address", length = 100)
     private String customerAddress;
 
     @Column(name = "contact_no")
-    private  int contactNumber;
+    private int contactNumber;
 
-    @Column(name="customer_salary")
+    @Column(name = "customer_salary")
     private double customerSalary;
 
-    public Customer(int customerId, String customerName, String customerAddress, int contactNumber, double customerSalary) {
+    // Default constructor
+    public Customer() {}
 
-    }
-
-    public Customer() {
-    }
-
-    public Customer(int customerId, String customerName, int contactNumber, String customerAddress, double customerSalary) {
-        this.customerId = customerId;
+    // Constructor without ID (for saving new customers)
+    public Customer(String customerName, String customerAddress, int contactNumber, double customerSalary) {
         this.customerName = customerName;
-        this.contactNumber = contactNumber;
         this.customerAddress = customerAddress;
+        this.contactNumber = contactNumber;
         this.customerSalary = customerSalary;
     }
 
+    // Full constructor (optional)
+    public Customer(int customerId, String customerName, String customerAddress, int contactNumber, double customerSalary) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.customerAddress = customerAddress;
+        this.contactNumber = contactNumber;
+        this.customerSalary = customerSalary;
+    }
+
+    // Getters and Setters
     public int getCustomerId() {
         return customerId;
     }
